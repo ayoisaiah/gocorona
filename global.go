@@ -30,7 +30,7 @@ func globalStatsWidget() (*widgets.Paragraph, error) {
 	widget.Text = p.Sprintf("[Infections](fg:blue): %d (%d today)\n\n", globalStats.Cases, globalStats.TodayCases)
 	widget.Text += p.Sprintf("[Deaths](fg:red): %d (%d today)\n\n", globalStats.Deaths, globalStats.TodayDeaths)
 	widget.Text += p.Sprintf("[Recoveries](fg:green): %d (%d remaining)\n\n", globalStats.Recovered, globalStats.Active)
-	widget.Text += p.Sprintf("[Critical](fg:yellow): %d\n\n", globalStats.Critical)
+	widget.Text += p.Sprintf("[Critical](fg:yellow): %d (%.2f%s of cases)\n\n", globalStats.Critical, float64(globalStats.Critical)/float64(globalStats.Cases)*100, "%")
 	widget.SetRect(0, 0, 50, 10)
 	widget.BorderStyle.Fg = ui.ColorYellow
 
