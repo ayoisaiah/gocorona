@@ -22,16 +22,17 @@ func main() {
 		log.Fatal(err)
 	}
 
-	countriesTable, err := affectedCountriesTable()
+	worldwideTable := &WorldwideTable{}
+	err = worldwideTable.Construct()
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	gs := ui.NewRow(0.25, ui.NewCol(1.0, globalStats))
-	ct := ui.NewRow(0.67, ui.NewCol(1.0, countriesTable))
+	ct := ui.NewRow(0.67, ui.NewCol(1.0, worldwideTable.Widget))
 	st := ui.NewRow(0.08, ui.NewCol(1.0, shortcuts()))
 
-	grid.Set(gs, ct, st)
+	grid.Set(gs, st, ct)
 	ui.Render(grid)
 
 	ticker := time.Tick(time.Second / time.Duration(60))
@@ -43,9 +44,25 @@ func main() {
 			case "q", "<C-c>":
 				return
 			case "j", "<Down>":
-				countriesTable.ScrollDown()
+				worldwideTable.Widget.ScrollDown()
 			case "k", "<Up>":
-				countriesTable.ScrollUp()
+				worldwideTable.Widget.ScrollUp()
+			case "<F1>":
+				worldwideTable.SortByCases()
+			case "<F2>":
+				worldwideTable.SortByCasesToday()
+			case "<F3>":
+				worldwideTable.SortByDeaths()
+			case "<F4>":
+				worldwideTable.SortByDeathsToday()
+			case "<F5>":
+				worldwideTable.SortByRecoveries()
+			case "<F6>":
+				worldwideTable.SortByActive()
+			case "<F7>":
+				worldwideTable.SortByCritical()
+			case "<F8>":
+				worldwideTable.SortByMortality()
 			case "<Resize>":
 				tw, th = ui.TerminalDimensions()
 				grid.SetRect(0, 0, tw, th)
