@@ -9,7 +9,7 @@ type Credits struct {
 
 // Construct creates the credits widget
 // containing info about the project
-func (self *Credits) Construct() {
+func (c *Credits) Construct() {
 	widget := widgets.NewParagraph()
 
 	widget.Title = "💪 About Gocorona"
@@ -27,5 +27,5 @@ Gocorona relies heavily on other open source software listed below:
 👉 NovelCovid API: [https://github.com/NovelCovid/API](fg:blue)
 	`
 
-	self.Widget = widget
+	c.Widget = widget
 }

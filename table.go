@@ -42,82 +42,82 @@ type Parent interface {
 
 // FetchData retrieves the latest data from the `url`
 // and sorts it by total cases
-func (self *Table) FetchData(url string) error {
-	err := fetch(url, &self.Data)
+func (t *Table) FetchData(url string) error {
+	err := fetch(url, &t.Data)
 	if err != nil {
 		return err
 	}
 
-	self.SortByCases()
-	self.Sort = "Total Cases"
+	t.SortByCases()
+	t.Sort = "Total Cases"
 
 	return nil
 }
 
 // Construct calls the Construct method of the parent
-func (self *Table) Construct() {
-	self.parent.Construct()
+func (t *Table) Construct() {
+	t.parent.Construct()
 }
 
 // SortByCases sorts the data by number of total cases
-func (self *Table) SortByCases() {
-	sort.SliceStable(self.Data, func(i, j int) bool {
-		return self.Data[i].Cases > self.Data[j].Cases
+func (t *Table) SortByCases() {
+	sort.SliceStable(t.Data, func(i, j int) bool {
+		return t.Data[i].Cases > t.Data[j].Cases
 	})
-	self.Sort = "Total Cases"
-	self.Construct()
+	t.Sort = "Total Cases"
+	t.Construct()
 }
 
 // SortByCasesToday sorts the data by number of cases today
-func (self *Table) SortByCasesToday() {
-	sort.SliceStable(self.Data, func(i, j int) bool {
-		return self.Data[i].TodayCases > self.Data[j].TodayCases
+func (t *Table) SortByCasesToday() {
+	sort.SliceStable(t.Data, func(i, j int) bool {
+		return t.Data[i].TodayCases > t.Data[j].TodayCases
 	})
-	self.Sort = "Cases (today)"
-	self.Construct()
+	t.Sort = "Cases (today)"
+	t.Construct()
 }
 
 // SortByDeaths sorts the data by number of total deaths
-func (self *Table) SortByDeaths() {
-	sort.SliceStable(self.Data, func(i, j int) bool {
-		return self.Data[i].Deaths > self.Data[j].Deaths
+func (t *Table) SortByDeaths() {
+	sort.SliceStable(t.Data, func(i, j int) bool {
+		return t.Data[i].Deaths > t.Data[j].Deaths
 	})
-	self.Sort = "Total Deaths"
-	self.Construct()
+	t.Sort = "Total Deaths"
+	t.Construct()
 }
 
 // SortByDeathsToday sorts the data by number of deaths today
-func (self *Table) SortByDeathsToday() {
-	sort.SliceStable(self.Data, func(i, j int) bool {
-		return self.Data[i].TodayDeaths > self.Data[j].TodayDeaths
+func (t *Table) SortByDeathsToday() {
+	sort.SliceStable(t.Data, func(i, j int) bool {
+		return t.Data[i].TodayDeaths > t.Data[j].TodayDeaths
 	})
-	self.Sort = "Deaths (today)"
-	self.Construct()
+	t.Sort = "Deaths (today)"
+	t.Construct()
 }
 
 // SortByActive sorts the data by number of active cases
-func (self *Table) SortByActive() {
-	sort.SliceStable(self.Data, func(i, j int) bool {
-		return self.Data[i].Active > self.Data[j].Active
+func (t *Table) SortByActive() {
+	sort.SliceStable(t.Data, func(i, j int) bool {
+		return t.Data[i].Active > t.Data[j].Active
 	})
-	self.Sort = "Active"
-	self.Construct()
+	t.Sort = "Active"
+	t.Construct()
 }
 
 // SortByRecoveries sorts the data by number of total recoveries
-func (self *Table) SortByRecoveries() {
-	sort.SliceStable(self.Data, func(i, j int) bool {
-		return self.Data[i].Recovered > self.Data[j].Recovered
+func (t *Table) SortByRecoveries() {
+	sort.SliceStable(t.Data, func(i, j int) bool {
+		return t.Data[i].Recovered > t.Data[j].Recovered
 	})
-	self.Sort = "Recoveries"
-	self.Construct()
+	t.Sort = "Recoveries"
+	t.Construct()
 }
 
 // SortByMortality sorts the data by mortality rate
-func (self *Table) SortByMortality() {
-	sort.SliceStable(self.Data, func(i, j int) bool {
-		return float64(self.Data[i].Deaths)/float64(self.Data[i].Cases) > float64(self.Data[j].Deaths)/float64(self.Data[j].Cases)
+func (t *Table) SortByMortality() {
+	sort.SliceStable(t.Data, func(i, j int) bool {
+		return float64(t.Data[i].Deaths)/float64(t.Data[i].Cases) > float64(t.Data[j].Deaths)/float64(t.Data[j].Cases)
 	})
-	self.Sort = "Mortality"
-	self.Construct()
+	t.Sort = "Mortality"
+	t.Construct()
 }

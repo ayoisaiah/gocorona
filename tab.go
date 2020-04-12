@@ -9,9 +9,9 @@ type Tab struct {
 
 // Construct creates the tab widget for
 // switching between views
-func (self *Tab) Construct() {
+func (t *Tab) Construct() {
 	widget := widgets.NewTabPane("🌎 Global", " 🇺  USA", "😷 Protect Yourself", "👌 Credits")
 	widget.Border = true
 
-	self.Widget = widget
+	t.Widget = widget
 }

@@ -11,7 +11,7 @@ type Loading struct {
 }
 
 // Construct creates the loading widget
-func (self *Loading) Construct() {
+func (l *Loading) Construct() {
 	widget := widgets.NewParagraph()
 	widget.Text = `
 	 ____
@@ -27,5 +27,5 @@ func (self *Loading) Construct() {
 	widget.SetRect(0, 0, 100, 50)
 	widget.Border = false
 
-	self.Widget = widget
+	l.Widget = widget
 }

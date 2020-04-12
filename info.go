@@ -11,7 +11,7 @@ type CoronavirusInfo struct {
 // Construct creates a widget containing
 // info about the coronavirus pandamic and how
 // to protect oneself
-func (self *CoronavirusInfo) Construct() {
+func (ci *CoronavirusInfo) Construct() {
 	widget := widgets.NewParagraph()
 
 	widget.Title = "🤒 Learn about the Coronavirus Pandemic"
@@ -44,5 +44,5 @@ To stop the spread of coronavirus, you should:
 Learn more at [https://www.nhs.uk/conditions/coronavirus-covid-19/](fg:blue)
 	`
 
-	self.Widget = widget
+	ci.Widget = widget
 }
