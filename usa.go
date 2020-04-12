@@ -17,6 +17,7 @@ type USA struct {
 // FetchData retrieves the latest data for each USA state
 // that has stats available, and sorts it by total cases
 func (self *USA) FetchData() error {
+	self.parent = self
 	url := "https://corona.lmao.ninja/states"
 	return self.Table.FetchData(url)
 }
@@ -56,6 +57,8 @@ func (self *USA) Construct() {
 	table.FillRow = true
 	table.RowSeparator = false
 	table.RowStyles[0] = ui.NewStyle(ui.ColorWhite, ui.ColorBlack, ui.ModifierBold)
+	table.BorderLeft = false
+	table.BorderRight = false
 
 	if self.Widget == nil {
 		self.Widget = table
