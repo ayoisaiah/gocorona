@@ -1,9 +1,11 @@
 package main
 
 import (
+	"context"
 	"log"
 
 	ui "github.com/gizak/termui/v3"
+	"golang.org/x/sync/errgroup"
 )
 
 func main() {
@@ -13,29 +15,39 @@ func main() {
 
 	defer ui.Close()
 
+	loading := &Loading{}
+	loading.Construct()
+
+	ui.Render(loading.Widget)
+
 	tw, th := ui.TerminalDimensions()
 	grid := ui.NewGrid()
 	grid.SetRect(0, 0, tw, th)
 
+	errs, _ := errgroup.WithContext(context.TODO())
+
 	global := &Global{}
-	if err := global.FetchData(); err != nil {
-		log.Fatal(err)
-	}
-	global.Construct()
-
 	countries := &Countries{}
-	countries.parent = countries
-	if err := countries.FetchData(); err != nil {
-		log.Fatal(err)
-	}
-	countries.Construct()
-
 	usa := &USA{}
-	usa.parent = usa
-	if err := usa.FetchData(); err != nil {
+
+	errs.Go(func() error {
+		return global.FetchData()
+	})
+
+	errs.Go(func() error {
+		return countries.FetchData()
+	})
+
+	errs.Go(func() error {
+		return usa.FetchData()
+	})
+
+	err := errs.Wait()
+	if err != nil {
 		log.Fatal(err)
 	}
-	usa.Construct()
+
+	global.Construct()
 
 	tab := &Tab{}
 	tab.Construct()
@@ -65,6 +77,7 @@ func main() {
 	currentTable := &countries.Table
 
 	grid.Set(tabWidget, globalWidget, sortWidget, countriesTable, instructionsWidget)
+	ui.Clear()
 	ui.Render(grid)
 
 	renderTab := func() {
