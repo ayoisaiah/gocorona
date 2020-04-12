@@ -45,7 +45,7 @@ func (self *Global) Construct() {
 	p := message.NewPrinter(language.English)
 
 	widget := widgets.NewParagraph()
-	widget.Title = "Global statistics"
+	widget.Title = "🌐 Global statistics"
 	widget.Text = p.Sprintf("[Infections](fg:blue): %d (%d today)\n", self.Cases, self.TodayCases)
 	widget.Text += p.Sprintf("[Deaths](fg:red): %d (%d today)\n", self.Deaths, self.TodayDeaths)
 	widget.Text += p.Sprintf("[Recoveries](fg:green): %d (%d remaining)\n", self.Recovered, self.Active)
@@ -66,6 +66,7 @@ type Countries struct {
 // FetchData retrieves the latest data for each country
 // that has stats available, and sorts it by total cases
 func (self *Countries) FetchData() error {
+	self.parent = self
 	url := "https://corona.lmao.ninja/v2/countries"
 	return self.Table.FetchData(url)
 }
@@ -105,6 +106,8 @@ func (self *Countries) Construct() {
 	table.FillRow = true
 	table.RowSeparator = false
 	table.RowStyles[0] = ui.NewStyle(ui.ColorWhite, ui.ColorBlack, ui.ModifierBold)
+	table.BorderLeft = false
+	table.BorderRight = false
 
 	if self.Widget == nil {
 		self.Widget = table

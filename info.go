@@ -14,7 +14,7 @@ type CoronavirusInfo struct {
 func (self *CoronavirusInfo) Construct() {
 	widget := widgets.NewParagraph()
 
-	widget.Title = "Learn about the Coronavirus Pandemic"
+	widget.Title = "🤒 Learn about the Coronavirus Pandemic"
 	widget.Text = `
 [There is currently No Vaccine to prevent Coronavirus](fg:red)
 

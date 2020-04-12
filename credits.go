@@ -12,7 +12,7 @@ type Credits struct {
 func (self *Credits) Construct() {
 	widget := widgets.NewParagraph()
 
-	widget.Title = "About Gocorona"
+	widget.Title = "💪 About Gocorona"
 	widget.Text = `
 Worldwide Coronavirus (COVID-19) Statistics for your terminal
 
