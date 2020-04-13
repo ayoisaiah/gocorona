@@ -3,7 +3,6 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/ayoisaiah/gocorona)](https://goreportcard.com/report/github.com/ayoisaiah/gocorona)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7136493cf477467387381890cb25dc9e)](https://www.codacy.com/manual/ayoisaiah/gocorona?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=ayoisaiah/gocorona&amp;utm_campaign=Badge_Grade)
 [![HitCount](http://hits.dwyl.com/ayoisaiah/gocorona.svg)](http://hits.dwyl.com/ayoisaiah/gocorona)
-[![MIT Licence](https://img.shields.io/github/license/ayoisaiah/gocorona)](https://github.com/ayoisaiah/gocorona/blob/master/LICENSE)
 [![PR's Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)](http://makeapullrequest.com)
 
 View the latest Coronavirus (COVID-19) statistics in your terminal.
@@ -55,5 +54,4 @@ Bug reports, or pull requests are much welcome!
 
 ## Licence
 
-- Created by Ayooluwa Isaiah and released under the terms of the [MIT
-    Licence](http://opensource.org/licenses/MIT).
+Created by Ayooluwa Isaiah and released under the terms of the [MIT Licence](http://opensource.org/licenses/MIT).
