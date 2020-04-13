@@ -18,7 +18,7 @@ critical and mortality rate
 
 ## Demo
 
-[![asciicast](https://asciinema.org/a/YCLvVJ4M4q6aX2uWBDufyapSC.svg)](https://asciinema.org/a/YCLvVJ4M4q6aX2uWBDufyapSC)
+[![asciicast](https://asciinema.org/a/6FfMPrBKsEqpiO7YyaEdrZoV0.svg)](https://asciinema.org/a/6FfMPrBKsEqpiO7YyaEdrZoV0)
 
 ## Installation
 
