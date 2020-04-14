@@ -12,7 +12,7 @@ type Instructions struct {
 func (i *Instructions) Construct() {
 	widget := widgets.NewParagraph()
 	widget.Title = "👉 Navigation"
-	widget.Text = "Press q to quit, Press h or l to switch tabs, Press j or k to scroll up or down"
+	widget.Text = "Press q to quit, Press h or l to switch tabs, Press k or j to scroll up or down"
 	widget.Border = true
 	widget.BorderStyle.Fg = ui.ColorYellow
 
