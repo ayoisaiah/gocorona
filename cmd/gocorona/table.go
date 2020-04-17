@@ -49,8 +49,6 @@ func (t *Table) FetchData(url string) error {
 	}
 
 	t.SortByCases()
-	t.Sort = "Total Cases"
-
 	return nil
 }
 
