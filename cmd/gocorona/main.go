@@ -28,7 +28,9 @@ func main() {
 
 	global := &Global{}
 	countries := &Countries{}
+	countries.parent = countries
 	usa := &USA{}
+	usa.parent = usa
 
 	errs.Go(func() error {
 		return global.FetchData()

@@ -66,7 +66,6 @@ type Countries struct {
 // FetchData retrieves the latest data for each country
 // that has stats available, and sorts it by total cases
 func (c *Countries) FetchData() error {
-	c.parent = c
 	url := "https://corona.lmao.ninja/v2/countries"
 	return c.Table.FetchData(url)
 }
