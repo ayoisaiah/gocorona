@@ -16,19 +16,18 @@ type USA struct {
 
 // FetchData retrieves the latest data for each USA state
 // that has stats available, and sorts it by total cases
-func (self *USA) FetchData() error {
-	self.parent = self
-	url := "https://corona.lmao.ninja/states"
-	return self.Table.FetchData(url)
+func (u *USA) FetchData() error {
+	url := "https://corona.lmao.ninja/v2/states"
+	return u.Table.FetchData(url)
 }
 
 // Construct constructs the USA states table widget
-func (self *USA) Construct() {
+func (u *USA) Construct() {
 	p := message.NewPrinter(language.English)
 	table := widgets.NewTable()
 	tableHeader := []string{"#", "State", "Total Cases", "Cases (today)", "Total Deaths", "Deaths (today)", "Recoveries", "Active", "Mortality"}
 	for i, v := range tableHeader {
-		if v == self.Sort {
+		if v == u.Sort {
 			tableHeader[i] = fmt.Sprintf("[%s](fg:red) ▼", tableHeader[i])
 			break
 		}
@@ -36,8 +35,8 @@ func (self *USA) Construct() {
 
 	table.Rows = [][]string{tableHeader}
 
-	for i, v := range self.Data {
-		self.Data[i].Recovered = v.Cases - v.Deaths - v.Active
+	for i, v := range u.Data {
+		u.Data[i].Recovered = v.Cases - v.Deaths - v.Active
 		table.Rows = append(table.Rows, []string{
 			p.Sprintf("%d", i+1),
 			v.State,
@@ -60,9 +59,9 @@ func (self *USA) Construct() {
 	table.BorderLeft = false
 	table.BorderRight = false
 
-	if self.Widget == nil {
-		self.Widget = table
+	if u.Widget == nil {
+		u.Widget = table
 	} else {
-		self.Widget.Rows = table.Rows
+		u.Widget.Rows = table.Rows
 	}
 }
