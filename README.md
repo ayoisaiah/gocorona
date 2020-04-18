@@ -20,25 +20,29 @@ critical and mortality rate
 
 [![asciicast](https://asciinema.org/a/6FfMPrBKsEqpiO7YyaEdrZoV0.svg)](https://asciinema.org/a/6FfMPrBKsEqpiO7YyaEdrZoV0)
 
-## Installation
+## Installation and usage
 
 You can download the precompiled binaries for Linux, Windows, and macOS [here](https://github.com/ayoisaiah/gocorona/releases) (only for amd64)
-
-Or clone the repo and build from source:
-
-```bash
-$ git clone https://github.com/ayoisaiah/gocorona
-$ cd gocorona
-$ go build ./cmd/gocorona/...
-```
-
-## Usage
 
 Ensure the binary is executable by the current user, then execute it:
 
 ```bash
 $ chmod +x gocorona-linux
 $ ./gocorona-linux
+```
+
+Or if you have `go` installed, clone the repo and install from source:
+
+```bash
+$ git clone https://github.com/ayoisaiah/gocorona
+$ cd gocorona
+$ go install ./cmd/gocorona/...
+```
+
+Then run the `gocorona` command:
+
+```bash
+$ gocorona
 ```
 
 ## Credit and sources
