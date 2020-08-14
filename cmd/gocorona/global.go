@@ -50,7 +50,7 @@ func (g *Global) Construct() {
 	widget.Text += p.Sprintf("[Deaths](fg:red): %d (%d today)\n", g.Deaths, g.TodayDeaths)
 	widget.Text += p.Sprintf("[Recoveries](fg:green): %d (%d remaining)\n", g.Recovered, g.Active)
 	widget.Text += p.Sprintf("[Critical](fg:yellow): %d (%.2f%% of cases)\n", g.Critical, float64(g.Critical)/float64(g.Cases)*100)
-	widget.Text += p.Sprintf("[Mortality rate](fg:cyan): %.2f%%\n", float64(g.Deaths)/float64(g.Cases)*100)
+	widget.Text += p.Sprintf("[Mortality rate](fg:cyan): %.2f%%\n", float64(g.Deaths)/(float64(g.Recovered)+float64(g.Deaths))*100)
 	widget.Text += p.Sprintf("[Affected Countries](fg:magenta): %d\n", g.AffectedCountries)
 	widget.SetRect(0, 0, 50, 10)
 	widget.BorderStyle.Fg = ui.ColorYellow
@@ -74,7 +74,7 @@ func (c *Countries) FetchData() error {
 func (c *Countries) Construct() {
 	p := message.NewPrinter(language.English)
 	table := widgets.NewTable()
-	tableHeader := []string{"#", "Country", "Total Cases", "Cases (today)", "Total Deaths", "Deaths (today)", "Recoveries", "Active", "Critical", "Mortality"}
+	tableHeader := []string{"#", "Country", "Total Cases", "Cases (today)", "Total Deaths", "Deaths (today)", "Recoveries", "Active", "Critical", "Mortality", "Min Deaths"}
 	for i, v := range tableHeader {
 		if v == c.Sort {
 			tableHeader[i] = fmt.Sprintf("[%s](fg:red) ▼", tableHeader[i])
@@ -95,11 +95,12 @@ func (c *Countries) Construct() {
 			p.Sprintf("%d", v.Recovered),
 			p.Sprintf("%d", v.Active),
 			p.Sprintf("%d", v.Critical),
-			p.Sprintf("%.2f%s", float64(v.Deaths)/float64(v.Cases)*100, "%"),
+			p.Sprintf("%.2f%s", v.Mortality*100, "%"),
+			p.Sprintf("%d", v.MinDeaths),
 		})
 	}
 
-	table.ColumnWidths = []int{5, 22, 20, 20, 18, 18, 15, 15, 15, 15}
+	table.ColumnWidths = []int{5, 22, 20, 20, 18, 18, 15, 15, 15, 15, 15}
 	table.TextAlignment = ui.AlignCenter
 	table.TextStyle = ui.NewStyle(ui.ColorWhite)
 	table.FillRow = true

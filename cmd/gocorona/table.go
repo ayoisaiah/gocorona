@@ -18,14 +18,16 @@ type Table struct {
 			Long float64 `json:"long"`
 			Flag string  `json:"flag"`
 		} `json:"countryInfo"`
-		Updated             int64   `json:"updated"`
-		Cases               int     `json:"cases"`
-		TodayCases          int     `json:"todayCases"`
-		Deaths              int     `json:"deaths"`
-		TodayDeaths         int     `json:"todayDeaths"`
-		Recovered           int     `json:"recovered"`
-		Active              int     `json:"active"`
-		Critical            int     `json:"critical"`
+		Updated             int64 `json:"updated"`
+		Cases               int   `json:"cases"`
+		TodayCases          int   `json:"todayCases"`
+		Deaths              int   `json:"deaths"`
+		TodayDeaths         int   `json:"todayDeaths"`
+		Recovered           int   `json:"recovered"`
+		Active              int   `json:"active"`
+		Critical            int   `json:"critical"`
+		Mortality           float64
+		MinDeaths           int
 		CasesPerOneMillion  float64 `json:"casesPerOneMillion"`
 		DeathsPerOneMillion float64 `json:"deathsPerOneMillion"`
 		Tests               int     `json:"tests"`
@@ -46,6 +48,12 @@ func (t *Table) FetchData(url string) error {
 	err := fetch(url, &t.Data)
 	if err != nil {
 		return err
+	}
+
+	// Update virtual columns
+	for i := range t.Data {
+		t.Data[i].Mortality = float64(t.Data[i].Deaths) / (float64(t.Data[i].Recovered) + float64(t.Data[i].Deaths))
+		t.Data[i].MinDeaths = int(t.Data[i].Mortality * float64(t.Data[i].Cases))
 	}
 
 	t.SortByCases()
@@ -114,8 +122,17 @@ func (t *Table) SortByRecoveries() {
 // SortByMortality sorts the data by mortality rate
 func (t *Table) SortByMortality() {
 	sort.SliceStable(t.Data, func(i, j int) bool {
-		return float64(t.Data[i].Deaths)/float64(t.Data[i].Cases) > float64(t.Data[j].Deaths)/float64(t.Data[j].Cases)
+		return t.Data[i].Mortality > t.Data[j].Mortality
 	})
 	t.Sort = "Mortality"
+	t.Construct()
+}
+
+// SortByMinDeaths sorts the data by minimum number of deaths
+func (t *Table) SortByMinDeaths() {
+	sort.SliceStable(t.Data, func(i, j int) bool {
+		return t.Data[i].MinDeaths > t.Data[j].MinDeaths
+	})
+	t.Sort = "Min Deaths"
 	t.Construct()
 }
