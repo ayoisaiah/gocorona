@@ -26,8 +26,8 @@ type Table struct {
 		Recovered           int   `json:"recovered"`
 		Active              int   `json:"active"`
 		Critical            int   `json:"critical"`
-		Mortality           float64
-		MinDeaths           int
+		MortalityIFR        float64
+		MortalityCFR        float64
 		CasesPerOneMillion  float64 `json:"casesPerOneMillion"`
 		DeathsPerOneMillion float64 `json:"deathsPerOneMillion"`
 		Tests               int     `json:"tests"`
@@ -52,8 +52,8 @@ func (t *Table) FetchData(url string) error {
 
 	// Update virtual columns
 	for i := range t.Data {
-		t.Data[i].Mortality = float64(t.Data[i].Deaths) / (float64(t.Data[i].Recovered) + float64(t.Data[i].Deaths))
-		t.Data[i].MinDeaths = int(t.Data[i].Mortality * float64(t.Data[i].Cases))
+		t.Data[i].MortalityIFR = float64(t.Data[i].Deaths) / float64(t.Data[i].Cases)
+		t.Data[i].MortalityCFR = float64(t.Data[i].Deaths) / (float64(t.Data[i].Recovered) + float64(t.Data[i].Deaths))
 	}
 
 	t.SortByCases()
@@ -119,20 +119,20 @@ func (t *Table) SortByRecoveries() {
 	t.Construct()
 }
 
-// SortByMortality sorts the data by mortality rate
-func (t *Table) SortByMortality() {
+// SortByMortalityIFR sorts the data by mortality rate (IFR)
+func (t *Table) SortByMortalityIFR() {
 	sort.SliceStable(t.Data, func(i, j int) bool {
-		return t.Data[i].Mortality > t.Data[j].Mortality
+		return t.Data[i].MortalityIFR > t.Data[j].MortalityIFR
 	})
-	t.Sort = "Mortality"
+	t.Sort = "Mortality (IFR)"
 	t.Construct()
 }
 
-// SortByMinDeaths sorts the data by minimum number of deaths
-func (t *Table) SortByMinDeaths() {
+// SortByMortalityCFR sorts the data by mortality rate (CFR)
+func (t *Table) SortByMortalityCFR() {
 	sort.SliceStable(t.Data, func(i, j int) bool {
-		return t.Data[i].MinDeaths > t.Data[j].MinDeaths
+		return t.Data[i].MortalityCFR > t.Data[j].MortalityCFR
 	})
-	t.Sort = "Min Deaths"
+	t.Sort = "Mortality (CFR)"
 	t.Construct()
 }

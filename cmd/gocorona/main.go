@@ -123,9 +123,9 @@ func main() {
 		case "<F7>":
 			countries.SortByCritical()
 		case "<F8>":
-			currentTable.SortByMortality()
+			currentTable.SortByMortalityIFR()
 		case "<F9>":
-			currentTable.SortByMinDeaths()
+			currentTable.SortByMortalityCFR()
 		case "<Resize>":
 			tw, th = ui.TerminalDimensions()
 			grid.SetRect(0, 0, tw, th)
