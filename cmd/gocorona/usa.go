@@ -25,7 +25,7 @@ func (u *USA) FetchData() error {
 func (u *USA) Construct() {
 	p := message.NewPrinter(language.English)
 	table := widgets.NewTable()
-	tableHeader := []string{"#", "State", "Total Cases", "Cases (today)", "Total Deaths", "Deaths (today)", "Recoveries", "Active", "Mortality"}
+	tableHeader := []string{"#", "State", "Total Cases", "Cases (today)", "Total Deaths", "Deaths (today)", "Recoveries", "Active", "Mortality (IFR)", "Mortality (CFR)"}
 	for i, v := range tableHeader {
 		if v == u.Sort {
 			tableHeader[i] = fmt.Sprintf("[%s](fg:red) ▼", tableHeader[i])
@@ -46,11 +46,12 @@ func (u *USA) Construct() {
 			p.Sprintf("%d", v.TodayDeaths),
 			p.Sprintf("%d", v.Recovered),
 			p.Sprintf("%d", v.Active),
-			p.Sprintf("%.2f%s", float64(v.Deaths)/float64(v.Cases)*100, "%"),
+			p.Sprintf("%.2f%s", v.MortalityIFR*100, "%"),
+			p.Sprintf("%.2f%s", v.MortalityCFR*100, "%"),
 		})
 	}
 
-	table.ColumnWidths = []int{5, 22, 20, 20, 18, 18, 15, 15, 15}
+	table.ColumnWidths = []int{5, 22, 20, 20, 18, 18, 15, 15, 20, 20}
 	table.TextAlignment = ui.AlignCenter
 	table.TextStyle = ui.NewStyle(ui.ColorWhite)
 	table.FillRow = true
