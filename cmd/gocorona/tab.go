@@ -1,6 +1,9 @@
 package main
 
-import "github.com/gizak/termui/v3/widgets"
+import (
+	ui "github.com/gizak/termui/v3"
+	"github.com/gizak/termui/v3/widgets"
+)
 
 // Tab represents the tab widget
 type Tab struct {
@@ -12,6 +15,7 @@ type Tab struct {
 func (t *Tab) Construct() {
 	widget := widgets.NewTabPane("🌎 Worldwide", " 🇺  USA", "😷 Protect Yourself", "👌 Credits")
 	widget.Border = true
+	widget.InactiveTabStyle = ui.NewStyle(ui.ColorClear)
 
 	t.Widget = widget
 }

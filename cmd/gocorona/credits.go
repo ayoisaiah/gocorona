@@ -1,6 +1,9 @@
 package main
 
-import "github.com/gizak/termui/v3/widgets"
+import (
+	ui "github.com/gizak/termui/v3"
+	"github.com/gizak/termui/v3/widgets"
+)
 
 // Credits represents the creates widget
 type Credits struct {
@@ -26,6 +29,8 @@ Gocorona relies heavily on other open source software listed below:
 👉 Termui: [https://github.com/gizak/termui](fg:blue)
 👉 NovelCovid API: [https://github.com/NovelCovid/API](fg:blue)
 	`
+	widget.TextStyle = ui.NewStyle(ui.ColorClear)
+	widget.TitleStyle = ui.NewStyle(ui.ColorClear)
 
 	c.Widget = widget
 }

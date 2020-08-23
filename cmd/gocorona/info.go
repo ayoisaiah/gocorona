@@ -1,6 +1,9 @@
 package main
 
-import "github.com/gizak/termui/v3/widgets"
+import (
+	ui "github.com/gizak/termui/v3"
+	"github.com/gizak/termui/v3/widgets"
+)
 
 // CoronavirusInfo represents the widget
 // that provides info about the coronavirus pandemic
@@ -43,6 +46,8 @@ To stop the spread of coronavirus, you should:
 
 Learn more at [https://www.nhs.uk/conditions/coronavirus-covid-19/](fg:blue)
 	`
+	widget.TitleStyle = ui.NewStyle(ui.ColorClear)
+	widget.TextStyle = ui.NewStyle(ui.ColorClear)
 
 	ci.Widget = widget
 }

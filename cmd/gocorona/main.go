@@ -15,6 +15,8 @@ func main() {
 
 	defer ui.Close()
 
+	ui.Theme.Default.Bg = ui.ColorBlack
+
 	loading := &Loading{}
 	loading.Construct()
 

@@ -28,7 +28,7 @@ func (u *USA) Construct() {
 	tableHeader := []string{"#", "State", "Total Cases", "Cases (today)", "Total Deaths", "Deaths (today)", "Recoveries", "Active", "Mortality (IFR)", "Mortality (CFR)"}
 	for i, v := range tableHeader {
 		if v == u.Sort {
-			tableHeader[i] = fmt.Sprintf("[%s](fg:red) ▼", tableHeader[i])
+			tableHeader[i] = fmt.Sprintf("[%s](fg:yellow) ▼", tableHeader[i])
 			break
 		}
 	}
@@ -53,7 +53,7 @@ func (u *USA) Construct() {
 
 	table.ColumnWidths = []int{5, 22, 20, 20, 18, 18, 15, 15, 20, 20}
 	table.TextAlignment = ui.AlignCenter
-	table.TextStyle = ui.NewStyle(ui.ColorWhite)
+	table.TextStyle = ui.NewStyle(ui.ColorClear)
 	table.FillRow = true
 	table.RowSeparator = false
 	table.RowStyles[0] = ui.NewStyle(ui.ColorWhite, ui.ColorBlack, ui.ModifierBold)

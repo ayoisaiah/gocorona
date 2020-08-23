@@ -55,6 +55,8 @@ func (g *Global) Construct() {
 	widget.Text += p.Sprintf("[Affected Countries](fg:magenta): %d\n", g.AffectedCountries)
 	widget.SetRect(0, 0, 50, 10)
 	widget.BorderStyle.Fg = ui.ColorYellow
+	widget.TitleStyle = ui.NewStyle(ui.ColorClear)
+	widget.TextStyle = ui.NewStyle(ui.ColorClear)
 
 	g.Widget = widget
 }
@@ -78,7 +80,7 @@ func (c *Countries) Construct() {
 	tableHeader := []string{"#", "Country", "Total Cases", "Cases (today)", "Total Deaths", "Deaths (today)", "Recoveries", "Active", "Critical", "Mortality (IFR)", "Mortality (CFR)"}
 	for i, v := range tableHeader {
 		if v == c.Sort {
-			tableHeader[i] = fmt.Sprintf("[%s](fg:red) ▼", tableHeader[i])
+			tableHeader[i] = fmt.Sprintf("[%s](fg:yellow) ▼", tableHeader[i])
 			break
 		}
 	}
@@ -103,7 +105,7 @@ func (c *Countries) Construct() {
 
 	table.ColumnWidths = []int{5, 22, 20, 20, 18, 18, 15, 15, 15, 20, 20}
 	table.TextAlignment = ui.AlignCenter
-	table.TextStyle = ui.NewStyle(ui.ColorWhite)
+	table.TextStyle = ui.NewStyle(ui.ColorClear)
 	table.FillRow = true
 	table.RowSeparator = false
 	table.RowStyles[0] = ui.NewStyle(ui.ColorWhite, ui.ColorBlack, ui.ModifierBold)

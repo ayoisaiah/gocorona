@@ -1,6 +1,7 @@
 package main
 
 import (
+	ui "github.com/gizak/termui/v3"
 	"github.com/gizak/termui/v3/widgets"
 )
 
@@ -26,6 +27,7 @@ func (l *Loading) Construct() {
 	`
 	widget.SetRect(0, 0, 100, 50)
 	widget.Border = false
+	widget.TextStyle = ui.NewStyle(ui.ColorClear)
 
 	l.Widget = widget
 }
