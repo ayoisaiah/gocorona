@@ -123,6 +123,14 @@ func main() {
 			currentTable.Widget.ScrollDown()
 		case "k", "<Up>":
 			currentTable.Widget.ScrollUp()
+		case "g", "<Home>":
+			currentTable.Widget.ScrollTop()
+		case "G", "<End>":
+			currentTable.Widget.ScrollBottom()
+		case "<PageUp>":
+			currentTable.Widget.ScrollPageUp()
+		case "<PageDown>":
+			currentTable.Widget.ScrollPageDown()
 		case "<F1>":
 			currentTable.SortByCases()
 		case "<F2>":
