@@ -6,33 +6,35 @@ import (
 	"github.com/gizak/termui/v3/widgets"
 )
 
+type TableData struct {
+	State       string `json:"state"`
+	Country     string `json:"country"`
+	CountryInfo struct {
+		ID   int     `json:"_id"`
+		Iso2 string  `json:"iso2"`
+		Iso3 string  `json:"iso3"`
+		Lat  float64 `json:"lat"`
+		Long float64 `json:"long"`
+		Flag string  `json:"flag"`
+	} `json:"countryInfo"`
+	Updated             int64 `json:"updated"`
+	Cases               int   `json:"cases"`
+	TodayCases          int   `json:"todayCases"`
+	Deaths              int   `json:"deaths"`
+	TodayDeaths         int   `json:"todayDeaths"`
+	Recovered           int   `json:"recovered"`
+	Active              int   `json:"active"`
+	Critical            int   `json:"critical"`
+	MortalityIFR        float64
+	MortalityCFR        float64
+	CasesPerOneMillion  float64 `json:"casesPerOneMillion"`
+	DeathsPerOneMillion float64 `json:"deathsPerOneMillion"`
+	Tests               int     `json:"tests"`
+	TestsPerOneMillion  float64 `json:"testsPerOneMillion"`
+}
+
 type Table struct {
-	Data []struct {
-		State       string `json:"state"`
-		Country     string `json:"country"`
-		CountryInfo struct {
-			ID   int     `json:"_id"`
-			Iso2 string  `json:"iso2"`
-			Iso3 string  `json:"iso3"`
-			Lat  float64 `json:"lat"`
-			Long float64 `json:"long"`
-			Flag string  `json:"flag"`
-		} `json:"countryInfo"`
-		Updated             int64 `json:"updated"`
-		Cases               int   `json:"cases"`
-		TodayCases          int   `json:"todayCases"`
-		Deaths              int   `json:"deaths"`
-		TodayDeaths         int   `json:"todayDeaths"`
-		Recovered           int   `json:"recovered"`
-		Active              int   `json:"active"`
-		Critical            int   `json:"critical"`
-		MortalityIFR        float64
-		MortalityCFR        float64
-		CasesPerOneMillion  float64 `json:"casesPerOneMillion"`
-		DeathsPerOneMillion float64 `json:"deathsPerOneMillion"`
-		Tests               int     `json:"tests"`
-		TestsPerOneMillion  float64 `json:"testsPerOneMillion"`
-	}
+	Data   []TableData
 	Widget *widgets.Table
 	Sort   string
 	parent Parent
@@ -50,18 +52,18 @@ func (t *Table) FetchData(url string) error {
 		return err
 	}
 
-	// Update virtual columns
-	for i := range t.Data {
-		t.Data[i].MortalityIFR = float64(t.Data[i].Deaths) / float64(t.Data[i].Cases)
-		t.Data[i].MortalityCFR = float64(t.Data[i].Deaths) / (float64(t.Data[i].Recovered) + float64(t.Data[i].Deaths))
-	}
-
 	t.SortByCases()
 	return nil
 }
 
 // Construct calls the Construct method of the parent
 func (t *Table) Construct() {
+	// Update virtual columns
+	for i := range t.Data {
+		t.Data[i].MortalityIFR = float64(t.Data[i].Deaths) / float64(t.Data[i].Cases)
+		t.Data[i].MortalityCFR = float64(t.Data[i].Deaths) / (float64(t.Data[i].Recovered) + float64(t.Data[i].Deaths))
+	}
+
 	t.parent.Construct()
 }
 

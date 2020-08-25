@@ -51,7 +51,7 @@ func (u *USA) Construct() {
 		})
 	}
 
-	table.ColumnWidths = []int{5, 22, 20, 20, 18, 18, 15, 15, 20, 20}
+	table.ColumnWidths = []int{5, 25, 20, 20, 18, 18, 15, 15, 20, 20}
 	table.TextAlignment = ui.AlignCenter
 	table.TextStyle = ui.NewStyle(ui.ColorClear)
 	table.FillRow = true

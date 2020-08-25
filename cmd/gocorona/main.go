@@ -51,7 +51,19 @@ func main() {
 		log.Fatal(err)
 	}
 
-	global.Construct()
+	global.Construct("🌐 Global statistics")
+
+	usaData := countries.FilterByName("USA")
+	usaAggregate := &Global{}
+	usaAggregate.All = All{
+		Cases:       usaData.Cases,
+		TodayCases:  usaData.TodayCases,
+		Deaths:      usaData.Deaths,
+		TodayDeaths: usaData.TodayDeaths,
+		Recovered:   usaData.Recovered,
+		Active:      usaData.Active,
+	}
+	usaAggregate.Construct("📈 Cases overview")
 
 	tab := &Tab{}
 	tab.Construct()
@@ -71,9 +83,10 @@ func main() {
 
 	tabWidget := ui.NewRow(0.08, ui.NewCol(1.0, tabpane))
 	globalWidget := ui.NewRow(0.20, ui.NewCol(1.0, global.Widget))
+	usaAggregateWidget := ui.NewRow(0.16, ui.NewCol(1.0, usaAggregate.Widget))
 	countriesTable := ui.NewRow(0.56, ui.NewCol(1.0, countries.Widget))
 	sortWidget := ui.NewRow(0.08, ui.NewCol(1.0, sortOptions.Widget))
-	usaTable := ui.NewRow(0.84, ui.NewCol(1.0, usa.Widget))
+	usaTable := ui.NewRow(0.68, ui.NewCol(1.0, usa.Widget))
 	infoWidget := ui.NewRow(0.92, ui.NewCol(1.0, coronavirusInfo.Widget))
 	creditsWidget := ui.NewRow(0.92, ui.NewCol(1.0, credits.Widget))
 	instructionsWidget := ui.NewRow(0.08, ui.NewCol(1.0, instructions.Widget))
@@ -92,7 +105,7 @@ func main() {
 			grid.Set(tabWidget, globalWidget, sortWidget, countriesTable, instructionsWidget)
 		case 1:
 			currentTable = &usa.Table
-			grid.Set(tabWidget, sortWidget, usaTable)
+			grid.Set(tabWidget, usaAggregateWidget, sortWidget, usaTable)
 		case 2:
 			grid.Set(tabWidget, infoWidget)
 		case 3:
