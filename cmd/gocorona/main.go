@@ -117,7 +117,7 @@ func main() {
 	for {
 		e := <-uiEvents
 		switch e.ID {
-		case "q", "<C-c>":
+		case "q", "<C-c>", "<Escape>":
 			return
 		case "j", "<Down>":
 			currentTable.Widget.ScrollDown()
