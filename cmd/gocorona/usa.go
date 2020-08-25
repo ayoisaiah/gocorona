@@ -17,7 +17,7 @@ type USA struct {
 // FetchData retrieves the latest data for each USA state
 // that has stats available, and sorts it by total cases
 func (u *USA) FetchData() error {
-	url := "https://corona.lmao.ninja/v2/states"
+	url := "https://disease.sh/v3/covid-19/states"
 	return u.Table.FetchData(url)
 }
 

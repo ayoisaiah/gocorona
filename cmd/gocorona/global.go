@@ -33,7 +33,7 @@ type Global struct {
 // cases, deaths, recovered, time last updated,
 // and active cases
 func (g *Global) FetchData() error {
-	url := "https://corona.lmao.ninja/v2/all"
+	url := "https://disease.sh/v3/covid-19/all"
 	return fetch(url, g)
 }
 
