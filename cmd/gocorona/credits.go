@@ -17,7 +17,7 @@ func (c *Credits) Construct() {
 
 	widget.Title = "💪 About Gocorona"
 	widget.Text = `
-Worldwide Coronavirus (COVID-19) Statistics for your terminal
+Worldwide COVID-19 tracker for your terminal.
 
 ©2020 Ayooluwa Isaiah and other contributors.
 
@@ -26,8 +26,9 @@ Gocorona is open source software made available under the terms of the MIT licen
 Star the repo or contribute on GitHub: [https://github.com/ayoisaiah/gocorona](fg:blue)
 
 Gocorona relies heavily on other open source software listed below:
+
 👉 Termui: [https://github.com/gizak/termui](fg:blue)
-👉 NovelCovid API: [https://github.com/NovelCovid/API](fg:blue)
+👉 Disease.sh API: [https://github.com/disease-sh/API](fg:blue)
 	`
 	widget.TextStyle = ui.NewStyle(ui.ColorClear)
 	widget.TitleStyle = ui.NewStyle(ui.ColorClear)

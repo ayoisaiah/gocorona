@@ -1,5 +1,5 @@
-github.com/ayoisaiah/termui/v3 v3.1.1-0.20200825190201-06a0332374fb h1:39yIzV9CeyxEGuhW8il2tOL4GoXoSLQL1KgkeLvh6hU=
-github.com/ayoisaiah/termui/v3 v3.1.1-0.20200825190201-06a0332374fb/go.mod h1:bXQEBkJpzxUAKf0+xq9MSWAvWZlE7c+aidmyFlkYTrY=
+github.com/ayoisaiah/termui/v3 v3.1.1-0.20200829215819-6a9abf802731 h1:7PZadhcoFrIB42kCKwCwGel/3IFmrHFlDqgQVMPEJLw=
+github.com/ayoisaiah/termui/v3 v3.1.1-0.20200829215819-6a9abf802731/go.mod h1:bXQEBkJpzxUAKf0+xq9MSWAvWZlE7c+aidmyFlkYTrY=
 github.com/mattn/go-runewidth v0.0.2/go.mod h1:LwmH8dsx7+W8Uxz3IHJYH5QSwggIsqBzpuz5H//U1FU=
 github.com/mattn/go-runewidth v0.0.7 h1:Ei8KR0497xHyKJPAv59M1dkC+rOZCMBJ+t3fZ+twI54=
 github.com/mattn/go-runewidth v0.0.7/go.mod h1:H031xJmbD/WCDINGzjvQ9THkh0rPKHF+m2gUSrubnMI=

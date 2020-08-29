@@ -72,7 +72,7 @@ func (t *Table) SortByCases() {
 	sort.SliceStable(t.Data, func(i, j int) bool {
 		return t.Data[i].Cases > t.Data[j].Cases
 	})
-	t.Sort = "Total Cases"
+	t.Sort = "Cases"
 	t.Construct()
 }
 
@@ -90,7 +90,7 @@ func (t *Table) SortByDeaths() {
 	sort.SliceStable(t.Data, func(i, j int) bool {
 		return t.Data[i].Deaths > t.Data[j].Deaths
 	})
-	t.Sort = "Total Deaths"
+	t.Sort = "Deaths"
 	t.Construct()
 }
 

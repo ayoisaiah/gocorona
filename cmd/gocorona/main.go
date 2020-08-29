@@ -33,9 +33,14 @@ func main() {
 	countries.parent = countries
 	usa := &USA{}
 	usa.parent = usa
+	vaccine := &Vaccine{}
 
 	errs.Go(func() error {
 		return global.FetchData()
+	})
+
+	errs.Go(func() error {
+		return vaccine.FetchData()
 	})
 
 	errs.Go(func() error {
@@ -65,6 +70,8 @@ func main() {
 	}
 	usaAggregate.Construct("📈 Cases overview")
 
+	vaccine.Construct()
+
 	tab := &Tab{}
 	tab.Construct()
 	tabpane := tab.Widget
@@ -87,6 +94,8 @@ func main() {
 	countriesTable := ui.NewRow(0.56, ui.NewCol(1.0, countries.Widget))
 	sortWidget := ui.NewRow(0.08, ui.NewCol(1.0, sortOptions.Widget))
 	usaTable := ui.NewRow(0.68, ui.NewCol(1.0, usa.Widget))
+	vaccinePhaseWidget := ui.NewRow(0.16, ui.NewCol(1.0, vaccine.PhaseWidget))
+	vaccineListWidget := ui.NewRow(0.76, ui.NewCol(1.0, vaccine.CandidatesWidget))
 	infoWidget := ui.NewRow(0.92, ui.NewCol(1.0, coronavirusInfo.Widget))
 	creditsWidget := ui.NewRow(0.92, ui.NewCol(1.0, credits.Widget))
 	instructionsWidget := ui.NewRow(0.08, ui.NewCol(1.0, instructions.Widget))
@@ -107,8 +116,10 @@ func main() {
 			currentTable = &usa.Table
 			grid.Set(tabWidget, usaAggregateWidget, sortWidget, usaTable)
 		case 2:
-			grid.Set(tabWidget, infoWidget)
+			grid.Set(tabWidget, vaccinePhaseWidget, vaccineListWidget)
 		case 3:
+			grid.Set(tabWidget, infoWidget)
+		case 4:
 			grid.Set(tabWidget, creditsWidget)
 		}
 	}
@@ -121,8 +132,14 @@ func main() {
 			return
 		case "j", "<Down>":
 			currentTable.Widget.ScrollDown()
+			if tabpane.ActiveTabIndex == 2 {
+				vaccine.CandidatesWidget.ScrollDown()
+			}
 		case "k", "<Up>":
 			currentTable.Widget.ScrollUp()
+			if tabpane.ActiveTabIndex == 2 {
+				vaccine.CandidatesWidget.ScrollUp()
+			}
 		case "g", "<Home>":
 			currentTable.Widget.ScrollTop()
 		case "G", "<End>":

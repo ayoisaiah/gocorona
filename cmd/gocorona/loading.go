@@ -21,9 +21,9 @@ func (l *Loading) Construct() {
 	| |_| | (_) | (_| (_) | | | (_) | | | | (_| |
 	 \____|\___/ \___\___/|_|  \___/|_| |_|\__,_|
 
- [gocorona](fg:black,bg:yellow) by Ayooluwa Isaiah
+ [Gocorona](fg:black,bg:yellow) by Ayooluwa Isaiah
 
- Worldwide Coronavirus (COVID-19) Statistics for your terminal
+ Worldwide COVID-19 tracker for your terminal
 	`
 	widget.SetRect(0, 0, 100, 50)
 	widget.Border = false

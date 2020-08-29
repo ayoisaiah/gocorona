@@ -9,4 +9,4 @@ require (
 	golang.org/x/text v0.3.2
 )
 
-replace github.com/gizak/termui/v3 => github.com/ayoisaiah/termui/v3 v3.1.1-0.20200825190201-06a0332374fb
+replace github.com/gizak/termui/v3 => github.com/ayoisaiah/termui/v3 v3.1.1-0.20200829215819-6a9abf802731
