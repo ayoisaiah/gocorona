@@ -7,11 +7,14 @@
 
 View the latest Coronavirus (COVID-19) statistics in your terminal.
 
+![Screenshot of application](https://github.com/ayoisaiah/gocorona/blob/master/demo.png)
+
 ## Features
 
 - View worldwide stats for cases, deaths, recoveries, active cases and
 mortality rate
 - View stats for Coronavirus disease reports across the US states
+- Track vaccine candidates
 - Sort the data by cases, cases today, deaths, deaths today, recoveries, active,
 critical and mortality rate
 - See prevention tips and other info about the Coronavirus pandemic
@@ -22,7 +25,7 @@ critical and mortality rate
 
 ## Installation and usage
 
-You can download the precompiled binaries for Linux, Windows, and macOS [here](https://github.com/ayoisaiah/gocorona/releases) (only for amd64)
+You can download binaries for Linux, Windows, and macOS on the [releases page](https://github.com/ayoisaiah/gocorona/releases).
 
 Ensure the binary is executable by the current user, then execute it:
 
@@ -50,7 +53,7 @@ $ gocorona
 Gocorona relies heavily on other open source software listed below:
 
 - [Termui](https://github.com/gizak/termui)
-- [NovelCovid API](https://github.com/NovelCovid/API)
+- [Disease.sh API](https://github.com/disease-sh/API)
 
 ## Contribute
 
