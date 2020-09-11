@@ -71,10 +71,18 @@ func candidatesWidget(v *Vaccine) *widgets.List {
 		str := p.Sprintf(`/* [%s (%s)](fg:yellow)
 ========================================================================== */
 		`, strings.ToUpper(value.Candidate), value.TrialPhase)
-		str += p.Sprintf("Sponsors     => %s\n", strings.Join(value.Sponsors, ", "))
-		str += p.Sprintf("Institutions => %s\n", strings.Join(value.Institutions, ", "))
-		str += p.Sprintf("Funding      => %s\n\n", strings.Join(value.Funding, ", "))
-		str += value.Details + "\n"
+		if len(value.Sponsors) > 0 && value.Sponsors[0] != "" {
+			str += p.Sprintf("Sponsors     => %s\n", strings.Join(value.Sponsors, ", "))
+		}
+
+		if len(value.Institutions) > 0 && value.Institutions[0] != "" {
+			str += p.Sprintf("Institutions => %s\n", strings.Join(value.Institutions, ", "))
+		}
+
+		if len(value.Funding) > 0 && value.Funding[0] != "" {
+			str += p.Sprintf("Funding      => %s\n", strings.Join(value.Funding, ", "))
+		}
+		str += "\n" + value.Details + "\n"
 		rows = append(rows, str)
 	}
 
