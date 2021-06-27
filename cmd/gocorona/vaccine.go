@@ -9,7 +9,7 @@ import (
 	"golang.org/x/text/message"
 )
 
-// VaccineData is represents the response from disease.sh
+// VaccineData is represents the response from disease.sh.
 type VaccineData struct {
 	Source          string `json:"source"`
 	TotalCandidates string `json:"totalCandidates"`
@@ -27,20 +27,18 @@ type VaccineData struct {
 	} `json:"data"`
 }
 
-// Vaccine represents the vaccine info widget
+// Vaccine represents the vaccine info widget.
 type Vaccine struct {
 	VaccineData
 	PhaseWidget      *widgets.Paragraph
 	CandidatesWidget *widgets.List
 }
 
-// FetchData retrieves the latest vaccine information
+// FetchData retrieves the latest vaccine information.
 func (v *Vaccine) FetchData() error {
 	url := "https://disease.sh/v3/covid-19/vaccine"
 	return fetch(url, v)
 }
-
-var phaseColours = map[string]string{}
 
 func phaseWidget() *widgets.Paragraph {
 	p := message.NewPrinter(language.English)
@@ -66,7 +64,9 @@ func candidatesWidget(v *Vaccine) *widgets.List {
 
 	widget := widgets.NewList()
 	widget.Title = "🔥 Candidates (use j/k to scroll)"
-	var rows []string
+
+	rows := []string{}
+
 	for _, value := range v.Data {
 		str := p.Sprintf(`/* [%s (%s)](fg:yellow)
 ========================================================================== */
@@ -82,6 +82,7 @@ func candidatesWidget(v *Vaccine) *widgets.List {
 		if len(value.Funding) > 0 && value.Funding[0] != "" {
 			str += p.Sprintf("Funding      => %s\n", strings.Join(value.Funding, ", "))
 		}
+
 		str += "\n" + value.Details + "\n"
 		rows = append(rows, str)
 	}
@@ -91,10 +92,11 @@ func candidatesWidget(v *Vaccine) *widgets.List {
 	widget.SelectedRowStyle.Fg = ui.ColorClear
 	widget.TextStyle = ui.NewStyle(ui.ColorClear)
 	widget.WrapText = true
+
 	return widget
 }
 
-// Construct creates the vaccine widget using the VaccineData
+// Construct creates the vaccine widget using the VaccineData.
 func (v *Vaccine) Construct() {
 	v.PhaseWidget = phaseWidget()
 	v.CandidatesWidget = candidatesWidget(v)

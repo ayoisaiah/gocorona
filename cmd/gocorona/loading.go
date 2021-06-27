@@ -6,12 +6,12 @@ import (
 )
 
 // Loading represents the loading widget
-// displayed while data is being fetched
+// displayed while data is being fetched.
 type Loading struct {
 	Widget *widgets.Paragraph
 }
 
-// Construct creates the loading widget
+// Construct creates the loading widget.
 func (l *Loading) Construct() {
 	widget := widgets.NewParagraph()
 	widget.Text = `

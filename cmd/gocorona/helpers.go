@@ -5,10 +5,15 @@ import (
 	"errors"
 	"io/ioutil"
 	"net/http"
+	"time"
 )
 
 func fetch(url string, target interface{}) error {
-	resp, err := http.Get(url)
+	client := http.Client{
+		Timeout: 30 * time.Second,
+	}
+
+	resp, err := client.Get(url)
 	if err != nil {
 		return err
 	}

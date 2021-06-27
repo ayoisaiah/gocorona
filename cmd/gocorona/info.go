@@ -6,14 +6,14 @@ import (
 )
 
 // CoronavirusInfo represents the widget
-// that provides info about the coronavirus pandemic
+// that provides info about the coronavirus pandemic.
 type CoronavirusInfo struct {
 	Widget *widgets.Paragraph
 }
 
 // Construct creates a widget containing
 // info about the coronavirus pandamic and how
-// to protect oneself
+// to protect oneself.
 func (ci *CoronavirusInfo) Construct() {
 	widget := widgets.NewParagraph()
 

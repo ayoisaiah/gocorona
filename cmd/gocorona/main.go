@@ -53,7 +53,7 @@ func main() {
 
 	err := errs.Wait()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(err) //nolint:gocritic // TODO: needs refactoring
 	}
 
 	global.Construct("🌐 Global statistics")
@@ -108,12 +108,15 @@ func main() {
 
 	renderTab := func() {
 		grid.Items = nil
+
 		switch tabpane.ActiveTabIndex {
 		case 0:
 			currentTable = &countries.Table
+
 			grid.Set(tabWidget, globalWidget, sortWidget, countriesTable, instructionsWidget)
 		case 1:
 			currentTable = &usa.Table
+
 			grid.Set(tabWidget, usaAggregateWidget, sortWidget, usaTable)
 		case 2:
 			grid.Set(tabWidget, vaccinePhaseWidget, vaccineListWidget)
@@ -125,6 +128,7 @@ func main() {
 	}
 
 	uiEvents := ui.PollEvents()
+
 	for {
 		e := <-uiEvents
 		switch e.ID {
@@ -132,11 +136,13 @@ func main() {
 			return
 		case "j", "<Down>":
 			currentTable.Widget.ScrollDown()
+
 			if tabpane.ActiveTabIndex == 2 {
 				vaccine.CandidatesWidget.ScrollDown()
 			}
 		case "k", "<Up>":
 			currentTable.Widget.ScrollUp()
+
 			if tabpane.ActiveTabIndex == 2 {
 				vaccine.CandidatesWidget.ScrollUp()
 			}
@@ -176,6 +182,7 @@ func main() {
 			tabpane.FocusRight()
 			renderTab()
 		}
+
 		ui.Render(grid)
 	}
 }

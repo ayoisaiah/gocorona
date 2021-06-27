@@ -10,23 +10,24 @@ import (
 	"golang.org/x/text/message"
 )
 
-// Countries represents the countries table
+// Countries represents the countries table.
 type Countries struct {
 	Table
 }
 
 // FetchData retrieves the latest data for each country
-// that has stats available, and sorts it by total cases
+// that has stats available, and sorts it by total cases.
 func (c *Countries) FetchData() error {
 	url := "https://disease.sh/v3/covid-19/countries"
 	return c.Table.FetchData(url)
 }
 
-// Construct constructs the countries table widget
+// Construct constructs the countries table widget.
 func (c *Countries) Construct() {
 	p := message.NewPrinter(language.English)
 	table := widgets.NewTable()
 	tableHeader := []string{"#", "Country", "Cases", "Cases (today)", "Deaths", "Deaths (today)", "Recoveries", "Active", "Critical", "Mortality (IFR)", "Mortality (CFR)"}
+
 	for i, v := range tableHeader {
 		if v == c.Sort {
 			tableHeader[i] = fmt.Sprintf("[%s](fg:yellow) ▼", tableHeader[i])
@@ -36,7 +37,8 @@ func (c *Countries) Construct() {
 
 	table.Rows = [][]string{tableHeader}
 
-	for i, v := range c.Data {
+	for i := range c.Data {
+		v := c.Data[i]
 		table.Rows = append(table.Rows, []string{
 			p.Sprintf("%d", i+1),
 			v.Country,
@@ -47,8 +49,8 @@ func (c *Countries) Construct() {
 			p.Sprintf("%d", v.Recovered),
 			p.Sprintf("%d", v.Active),
 			p.Sprintf("%d", v.Critical),
-			p.Sprintf("%.2f%s", v.MortalityIFR*100, "%"),
-			p.Sprintf("%.2f%s", v.MortalityCFR*100, "%"),
+			p.Sprintf("%.2f%s", v.MortalityIFR*100, "%"), //nolint:gomnd // 100 is a constant
+			p.Sprintf("%.2f%s", v.MortalityCFR*100, "%"), //nolint:gomnd // 100 is a constant
 		})
 	}
 
@@ -68,18 +70,21 @@ func (c *Countries) Construct() {
 	}
 }
 
-// SortByCritical sorts the countries by number of critical cases
+// SortByCritical sorts the countries by number of critical cases.
 func (c *Countries) SortByCritical() {
 	sort.SliceStable(c.Data, func(i, j int) bool {
 		return c.Data[i].Critical > c.Data[j].Critical
 	})
+
 	c.Sort = "Critical"
+
 	c.Construct()
 }
 
-// FilterByName returns the table data for the specified country name
+// FilterByName returns the table data for the specified country name.
 func (c *Countries) FilterByName(name string) *TableData {
-	for _, v := range c.Data {
+	for i := range c.Data {
+		v := c.Data[i]
 		if v.Country == name {
 			return &v
 		}

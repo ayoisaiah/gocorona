@@ -5,13 +5,13 @@ import (
 	"github.com/gizak/termui/v3/widgets"
 )
 
-// Credits represents the creates widget
+// Credits represents the creates widget.
 type Credits struct {
 	Widget *widgets.Paragraph
 }
 
 // Construct creates the credits widget
-// containing info about the project
+// containing info about the project.
 func (c *Credits) Construct() {
 	widget := widgets.NewParagraph()
 

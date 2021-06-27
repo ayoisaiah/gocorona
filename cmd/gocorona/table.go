@@ -45,7 +45,7 @@ type Parent interface {
 }
 
 // FetchData retrieves the latest data from the `url`
-// and sorts it by total cases
+// and sorts it by total cases.
 func (t *Table) FetchData(url string) error {
 	err := fetch(url, &t.Data)
 	if err != nil {
@@ -53,10 +53,11 @@ func (t *Table) FetchData(url string) error {
 	}
 
 	t.SortByCases()
+
 	return nil
 }
 
-// Construct calls the Construct method of the parent
+// Construct calls the Construct method of the parent.
 func (t *Table) Construct() {
 	// Update virtual columns
 	for i := range t.Data {
@@ -67,74 +68,90 @@ func (t *Table) Construct() {
 	t.parent.Construct()
 }
 
-// SortByCases sorts the data by number of total cases
+// SortByCases sorts the data by number of total cases.
 func (t *Table) SortByCases() {
 	sort.SliceStable(t.Data, func(i, j int) bool {
 		return t.Data[i].Cases > t.Data[j].Cases
 	})
+
 	t.Sort = "Cases"
+
 	t.Construct()
 }
 
-// SortByCasesToday sorts the data by number of cases today
+// SortByCasesToday sorts the data by number of cases today.
 func (t *Table) SortByCasesToday() {
 	sort.SliceStable(t.Data, func(i, j int) bool {
 		return t.Data[i].TodayCases > t.Data[j].TodayCases
 	})
+
 	t.Sort = "Cases (today)"
+
 	t.Construct()
 }
 
-// SortByDeaths sorts the data by number of total deaths
+// SortByDeaths sorts the data by number of total deaths.
 func (t *Table) SortByDeaths() {
 	sort.SliceStable(t.Data, func(i, j int) bool {
 		return t.Data[i].Deaths > t.Data[j].Deaths
 	})
+
 	t.Sort = "Deaths"
+
 	t.Construct()
 }
 
-// SortByDeathsToday sorts the data by number of deaths today
+// SortByDeathsToday sorts the data by number of deaths today.
 func (t *Table) SortByDeathsToday() {
 	sort.SliceStable(t.Data, func(i, j int) bool {
 		return t.Data[i].TodayDeaths > t.Data[j].TodayDeaths
 	})
+
 	t.Sort = "Deaths (today)"
+
 	t.Construct()
 }
 
-// SortByActive sorts the data by number of active cases
+// SortByActive sorts the data by number of active cases.
 func (t *Table) SortByActive() {
 	sort.SliceStable(t.Data, func(i, j int) bool {
 		return t.Data[i].Active > t.Data[j].Active
 	})
+
 	t.Sort = "Active"
+
 	t.Construct()
 }
 
-// SortByRecoveries sorts the data by number of total recoveries
+// SortByRecoveries sorts the data by number of total recoveries.
 func (t *Table) SortByRecoveries() {
 	sort.SliceStable(t.Data, func(i, j int) bool {
 		return t.Data[i].Recovered > t.Data[j].Recovered
 	})
+
 	t.Sort = "Recoveries"
+
 	t.Construct()
 }
 
-// SortByMortalityIFR sorts the data by mortality rate (IFR)
+// SortByMortalityIFR sorts the data by mortality rate (IFR).
 func (t *Table) SortByMortalityIFR() {
 	sort.SliceStable(t.Data, func(i, j int) bool {
 		return t.Data[i].MortalityIFR > t.Data[j].MortalityIFR
 	})
+
 	t.Sort = "Mortality (IFR)"
+
 	t.Construct()
 }
 
-// SortByMortalityCFR sorts the data by mortality rate (CFR)
+// SortByMortalityCFR sorts the data by mortality rate (CFR).
 func (t *Table) SortByMortalityCFR() {
 	sort.SliceStable(t.Data, func(i, j int) bool {
 		return t.Data[i].MortalityCFR > t.Data[j].MortalityCFR
 	})
+
 	t.Sort = "Mortality (CFR)"
+
 	t.Construct()
 }
