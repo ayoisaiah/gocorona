@@ -1,4 +1,4 @@
-package main
+package gocorona
 
 import (
 	ui "github.com/gizak/termui/v3"
